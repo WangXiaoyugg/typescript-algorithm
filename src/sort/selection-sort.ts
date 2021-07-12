@@ -1,3 +1,5 @@
+import SortTestHelper from '../utils/sort-test-helper';
+
 // 选择排序，每次扫描找到最小的元素索引，并和当前元素进行交换
 interface ICompareFn<T> {
     (a: T, b: T): boolean;
@@ -45,9 +47,17 @@ function swap<T>(arr: T[], i:number, j: number): void {
 
 function less<T>(a: T, b: T, compareFn?: ICompareFn<T>): boolean {
     if (compareFn) {
-        console.log(compareFn(a, b));
         return compareFn(a, b);
     } else {
         return a < b;
     }
 }
+
+function main() {
+    let n = 100;
+    let arr = SortTestHelper.generateRandomArray(n, 0, n);
+    selectionSort<number>(arr);
+    SortTestHelper.printArray(arr)
+}
+
+main();
