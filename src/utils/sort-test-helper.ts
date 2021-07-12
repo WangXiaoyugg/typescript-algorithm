@@ -18,4 +18,27 @@ export default class SortTestHelper {
         }
         console.log(print);
     }
+
+    public static isSorted<T>(arr: T []) {
+        let sorted = true;
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] > arr[i+1]) {
+                return false;
+            }
+        }
+        return sorted;
+    }
+
+    public static testSort<T>(sortName: string, sortFn: Function, arr: T[]) {
+        let startTime = Date.now()
+        sortFn(arr);
+        let endTime = Date.now()
+
+        if (!SortTestHelper.isSorted(arr)) {
+            throw new Error('Sort Function fail to sort array')
+        }
+        let seconds = (endTime - startTime) / 1000;
+        console.log(`${sortName} 排序${arr.length}元素：消耗${seconds}s`)
+
+    }
 }

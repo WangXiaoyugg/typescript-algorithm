@@ -54,10 +54,9 @@ function less<T>(a: T, b: T, compareFn?: ICompareFn<T>): boolean {
 }
 
 function main() {
-    let n = 100;
+    let n = 100000;
     let arr = SortTestHelper.generateRandomArray(n, 0, n);
-    selectionSort<number>(arr);
-    SortTestHelper.printArray(arr)
+    SortTestHelper.testSort('选择排序 ', selectionSort, arr);
 }
 
 main();
