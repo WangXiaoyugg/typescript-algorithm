@@ -5,7 +5,7 @@ interface ICompareFn<T> {
     (a: T, b: T): boolean;
 }
 
-function selectionSort<T>(arr: T[], compareFn?: ICompareFn<T>) {
+export function selectionSort<T>(arr: T[], compareFn?: ICompareFn<T>) {
     // 对数组中的元素进行排序
     for (let i = 0; i < arr.length; i++) {
         let minIndex = i;
@@ -20,24 +20,24 @@ function selectionSort<T>(arr: T[], compareFn?: ICompareFn<T>) {
     
 }
 
-let arr = [10, 9, 8, 7, 6, 5, 4, 3,2,1]
+// let arr = [10, 9, 8, 7, 6, 5, 4, 3,2,1]
 
-selectionSort<number>(arr)
-console.log(arr);
+// selectionSort<number>(arr)
+// console.log(arr);
 
-let arr1 = ["D", 'C', 'B', 'A']
-selectionSort<string>(arr1)
-console.log(arr1)
+// let arr1 = ["D", 'C', 'B', 'A']
+// selectionSort<string>(arr1)
+// console.log(arr1)
 
-interface IStudent {
-    name: string;
-    score: number;
-}
+// interface IStudent {
+//     name: string;
+//     score: number;
+// }
 
 
-let arr2: IStudent[] = [ {name: 'D', score: 100} , {name: 'A', score: 95 }, {name: 'B', score: 95} , {name: 'C', score: 90} ]
-selectionSort<IStudent>(arr2, (a, b) => a.score !== b.score ? a.score < b.score : a.name < b.name);
-console.log(arr2);
+// let arr2: IStudent[] = [ {name: 'D', score: 100} , {name: 'A', score: 95 }, {name: 'B', score: 95} , {name: 'C', score: 90} ]
+// selectionSort<IStudent>(arr2, (a, b) => a.score !== b.score ? a.score < b.score : a.name < b.name);
+// console.log(arr2);
 
 function swap<T>(arr: T[], i:number, j: number): void {
     let temp = arr[j]
@@ -59,4 +59,4 @@ function main() {
     SortTestHelper.testSort('选择排序 ', selectionSort, arr);
 }
 
-main();
+// main();

@@ -41,4 +41,8 @@ export default class SortTestHelper {
         console.log(`${sortName} 排序${arr.length}元素：消耗${seconds}s`)
 
     }
+
+    public static copyNumberArray(arr: number []) {
+        return [...arr];
+    }
 }
