@@ -9,7 +9,7 @@ import { selectionSort } from './selection-sort';
  * 这时候最后一个元素是最大的，所以最后一个元素就不需要参与比较大小
  * @param arr 
  */
-function bubbleSort<T>(arr: T[]) {
+export function bubbleSort<T>(arr: T[]) {
   let len = arr.length;
   for (let i = 0; i < len - 1; i++) {
     for (let j = 0; j < len - 1 - i; j++) {
@@ -30,4 +30,4 @@ function main() {
   SortTestHelper.testSort("选择排序", selectionSort, copyArr1);
 }
 
-main();
+// main();
