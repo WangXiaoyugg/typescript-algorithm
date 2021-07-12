@@ -1,3 +1,4 @@
+import swap from './swap';
 export default class SortTestHelper {
     public static generateRandomArray(n: number, rangeLeft: number, rangeRight: number): number[] {
         if (rangeLeft > rangeRight) {
@@ -44,5 +45,19 @@ export default class SortTestHelper {
 
     public static copyNumberArray(arr: number []) {
         return [...arr];
+    }
+
+    public static generateNearlyOrderArray(n: number, swapTimes: number): number[] {
+        let result:number[] = []
+        for (let i = 0; i < n; i++) {
+            result[i] = i;
+        }
+
+        for (let i = 0; i < swapTimes; i++) {
+            let posX = Math.floor(Math.random() * n)
+            let posY = Math.floor(Math.random() * n)
+            swap(result, posX, posY)
+        }
+        return result;
     }
 }
