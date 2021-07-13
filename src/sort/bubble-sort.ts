@@ -1,6 +1,6 @@
 import swap from '../utils/swap'
 import SortTestHelper from '../utils/sort-test-helper';
-import { insectionSort } from './insection-sort';
+import { insertSort } from './insection-sort';
 import { selectionSort } from './selection-sort';
 
 /**
@@ -26,7 +26,7 @@ function main() {
   let copyArr = SortTestHelper.copyNumberArray(arr);
   let copyArr1 = SortTestHelper.copyNumberArray(arr);
   SortTestHelper.testSort("冒泡排序", bubbleSort, arr);
-  SortTestHelper.testSort("插入排序", insectionSort, copyArr);
+  SortTestHelper.testSort("插入排序", insertSort, copyArr);
   SortTestHelper.testSort("选择排序", selectionSort, copyArr1);
 }
 

@@ -1,5 +1,5 @@
 import SortTestHelper from '../utils/sort-test-helper';
-import { insectionSort } from './insection-sort';
+import { insertSort } from './insection-sort';
 
 function mergeSort<T>(arr: T[]) {
     let n = arr.length;
@@ -9,15 +9,23 @@ function mergeSort<T>(arr: T[]) {
 
 function __mergeSort<T>(arr: T[], l: number, r: number) {
     // 递归终止条件
-    if (l >= r) return;
+    if (r -l <= 15) {
+        // 小于某个阈值，采用插入排序
+        insertSort(arr, l, r);
+        return;
+    }
     let mid = Math.floor(l + (r - l ) / 2)
     // 左半部分：[l, mid]， 右半部分： [mid+1, r];
     __mergeSort(arr, l, mid);
     __mergeSort(arr, mid+1, r);
 
-    // 左右分组进行归并
-    __merge(arr, l, mid, r);
+    if (arr[mid] > arr[mid + 1]) {
+        // 左右分组进行归并
+        __merge(arr, l, mid, r);
+    }
+ 
 }
+
 
 // 将 [l, mid] 和 [mid +1, r] 进行归并
 function __merge<T> (arr: T[], l: number, mid: number, r: number) {
@@ -54,10 +62,10 @@ function __merge<T> (arr: T[], l: number, mid: number, r: number) {
 
 function main() {
     let n = 50000;
-    let arr1 = SortTestHelper.generateRandomArray(n, 0, n);
+    let arr1 = SortTestHelper.generateNearlyOrderArray(n, 0);
     let arr2 = SortTestHelper.copyNumberArray(arr1);
 
-    SortTestHelper.testSort('插入排序', insectionSort, arr1);
+    SortTestHelper.testSort('插入排序', insertSort, arr1);
     SortTestHelper.testSort('归并排序', mergeSort, arr2);
 }
 
