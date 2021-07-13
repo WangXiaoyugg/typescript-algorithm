@@ -26,28 +26,46 @@ function __quickSort<T>(arr: T[], l: number, r: number) {
 // 返回p, 使得arr[l...p-1] < arr[p], arr[p+1....r] > arr[p]
 function __partition<T>(arr: T[], l: number, r: number): number {
     // arr在 [l...r] 之间的随机索引
+    // let rand = Math.floor(Math.random() * (r - l + 1)) + l;
+    // swap(arr, l, rand);
+    // let v = arr[l];
+    // // arr[l + 1... i] < v ; arr[j+1...i) > v;
+    // let j = l;
+    // for (let i = l + 1; i <= r; i++) {
+    //     if (arr[i] < v) {
+    //         swap(arr, j+1, i)
+    //         j++;
+    //     }
+    // }
+    // swap(arr, l, j);
+    // return j;
+
+    // 双路快速排序
     let rand = Math.floor(Math.random() * (r - l + 1)) + l;
     swap(arr, l, rand);
     let v = arr[l];
-    // arr[l + 1... i] < v ; arr[j+1...i) > v;
-    let j = l;
-    for (let i = l + 1; i <= r; i++) {
-        if (arr[i] < v) {
-            swap(arr, j+1, i)
-            j++;
-        }
+    // 对 arr[l+1...i] <= v; arr(j....r] >=v 
+    let i = l+1, j = r;
+    while(true) {
+        while(arr[i] < v  && i <=r) i++;
+        while(arr[j] > v && j >= l+1) j--;
+        if (i > j) break;
+        swap(arr, i, j);
+        i++;
+        j--;
     }
     swap(arr, l, j);
     return j;
+
 }
 
 function main() {
     let n = 100000;
-    let arr1 = SortTestHelper.generateNearlyOrderArray(n, 200);
+    let arr1 = SortTestHelper.generateRandomArray(n, 0, 10);
     let arr2 = SortTestHelper.copyNumberArray(arr1);
 
     SortTestHelper.testSort('快速排序', quickSort, arr2);
-    SortTestHelper.testSort('归并排序', mergeSort, arr1);
+    // SortTestHelper.testSort('归并排序', mergeSort, arr1);
 }
 
 main()
