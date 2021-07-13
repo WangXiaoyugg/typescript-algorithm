@@ -1,7 +1,7 @@
 import SortTestHelper from '../utils/sort-test-helper';
 import { insertSort } from './insection-sort';
 
-function mergeSort<T>(arr: T[]) {
+export function mergeSort<T>(arr: T[]) {
     let n = arr.length;
     // 对[l...r] 的范围的数组进行递归
     __mergeSort(arr, 0, n -1);
@@ -90,4 +90,4 @@ function main() {
     SortTestHelper.testSort('归并排序自第向上', mergeSortFromBottom, arr3);
 }
 
-main();
+// main();
