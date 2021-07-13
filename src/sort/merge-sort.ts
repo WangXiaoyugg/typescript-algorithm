@@ -59,14 +59,35 @@ function __merge<T> (arr: T[], l: number, mid: number, r: number) {
 
 }
 
+// 自下而上的归并排序
+function mergeSortFromBottom<T>(arr: T[]) {
+    let n = arr.length;
+
+    // 对于小数组，使用插入排序优化
+    for (let i = 0; i < n; i+= 16) {
+        insertSort(arr, i, Math.min(i + 15, n -1)); // [0, 15], [16, 31]
+    }
+
+    for (let sz = 16; sz <= n; sz += sz) {
+        for (let i = 0; i + sz < n; i += sz + sz ) {
+            // 对 arr[i... i + size - 1] 和 arr[i+size, i+ 2 *sz - 1]进行归并
+            if (arr[i + sz- 1] > arr[i + sz]) {
+                __merge(arr, i, i + sz - 1, Math.min(i + sz + sz - 1, n - 1));
+            }
+        }
+    }
+}
+
 
 function main() {
     let n = 50000;
-    let arr1 = SortTestHelper.generateNearlyOrderArray(n, 0);
+    let arr1 = SortTestHelper.generateNearlyOrderArray(n, 100);
     let arr2 = SortTestHelper.copyNumberArray(arr1);
+    let arr3 = SortTestHelper.copyNumberArray(arr1);
 
     SortTestHelper.testSort('插入排序', insertSort, arr1);
     SortTestHelper.testSort('归并排序', mergeSort, arr2);
+    SortTestHelper.testSort('归并排序自第向上', mergeSortFromBottom, arr3);
 }
 
 main();
