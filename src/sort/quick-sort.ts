@@ -7,7 +7,8 @@ import { insertSort } from './insection-sort';
 export function quickSort<T>(arr: T[]) {
     let n = arr.length;
     // 对[l, r]之间的元素进行排序
-    __quickSort(arr, 0, n - 1)
+    // __quickSort(arr, 0, n - 1)
+    __quickSort3Ways(arr, 0, n - 1);
 }
 
 // 对arr[l..r] 使用递归实现快速排序
@@ -21,6 +22,46 @@ function __quickSort<T>(arr: T[], l: number, r: number) {
     __quickSort(arr, l, p - 1);
     __quickSort(arr, p+1, r);
 }
+
+
+// 三路快速排序
+function __quickSort3Ways<T>(arr: T[], l: number, r: number) {
+    if (r - l <= 15) {
+        insertSort(arr, l, r);
+        return;
+    }
+
+    // partition 分组操作，<v, =v, >v;
+    let rand = Math.floor(Math.random() * (r - l + 1)) + l;
+    swap(arr, l, rand);
+    let v = arr[l];
+    
+    // arr[l+1...lt] < v;
+    let lt = l;
+    // arr[gt... r] > v;
+    let gt = r + 1;
+    // arr[lt + 1...i) == v;
+    let i = l + 1;
+    
+    while(i < gt) {
+        if (arr[i] < v) {
+            swap(arr, i, lt+1);
+            lt++;
+            i++;
+        } else if (arr[i] > v){
+            swap(arr,i, gt - 1);
+            gt--;
+        }
+        else {
+            i++;
+        }
+    }
+
+    swap(arr, l, lt);
+    __quickSort3Ways(arr, l, lt - 1);
+    __quickSort3Ways(arr, gt, r);
+}
+
 
 // 对 arr[l...r] 部分进行partition操作
 // 返回p, 使得arr[l...p-1] < arr[p], arr[p+1....r] > arr[p]
