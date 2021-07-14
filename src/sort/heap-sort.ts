@@ -42,7 +42,8 @@ function __shiftDown<T>(arr: T[], n: number, k: number) {
 function heapSort3<T>(arr: T[] ) {
     let n = arr.length;
     // heapify; arr 数组构建为一个堆
-    for (let i = Math.floor((n - 1) / 2); i >= 0; i--) {
+    // 最后一个非叶子节点的索引计算： Math.floor((count - 1 - 1) / 2)
+    for (let i = Math.floor((n - 1 - 1) / 2); i >= 0; i--) {
         __shiftDown<T>(arr, n, i);
     }
 
