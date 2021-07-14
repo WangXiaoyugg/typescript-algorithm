@@ -11,19 +11,6 @@ export function quickSort<T>(arr: T[]) {
     __quickSort3Ways(arr, 0, n - 1);
 }
 
-// 对arr[l..r] 使用递归实现快速排序
-function __quickSort<T>(arr: T[], l: number, r: number) {
-    if (r - l <= 15) {
-        insertSort(arr, l, r);
-        return;
-    }
-
-    let p = __partition(arr, l, r);
-    __quickSort(arr, l, p - 1);
-    __quickSort(arr, p+1, r);
-}
-
-
 // 三路快速排序
 function __quickSort3Ways<T>(arr: T[], l: number, r: number) {
     if (r - l <= 15) {
@@ -61,6 +48,21 @@ function __quickSort3Ways<T>(arr: T[], l: number, r: number) {
     __quickSort3Ways(arr, l, lt - 1);
     __quickSort3Ways(arr, gt, r);
 }
+
+
+// 对arr[l..r] 使用递归实现快速排序
+function __quickSort<T>(arr: T[], l: number, r: number) {
+    if (r - l <= 15) {
+        insertSort(arr, l, r);
+        return;
+    }
+
+    let p = __partition(arr, l, r);
+    __quickSort(arr, l, p - 1);
+    __quickSort(arr, p+1, r);
+}
+
+
 
 
 // 对 arr[l...r] 部分进行partition操作
