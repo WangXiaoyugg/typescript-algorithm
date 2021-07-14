@@ -2,9 +2,28 @@ import swap from '../utils/swap';
 export class MaxHeap<T> {
     private count: number;
     private data: T[];
-    constructor(capacity: number) {
+
+    constructor(capacity: number);
+    constructor(capacity: number, arr: T[])
+    constructor(capacity: number, arr?:T[]) {
         this.data = new Array(capacity + 1);
         this.count = 0;
+        if (arr) {
+            this.heapSort2(arr)
+        }
+    }
+
+    heapSort2(arr: T[]) {
+        let n = arr.length;
+        for (let i = 0; i < n; i++) {
+            this.data[i+1] = arr[i];
+        }
+        this.count = n;
+
+        for(let i = Math.floor(this.count / 2); i >=1; i--) {
+            this.shiftDown(i);
+        }
+
     }
 
     size() {
@@ -72,4 +91,4 @@ function main() {
 }
 
 
-main() 
+// main() 
